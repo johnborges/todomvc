@@ -3,7 +3,8 @@ angular.module('todoApp', [])
     var todoList = this;
     todoList.todos = [
       {text:'learn AngularJS', done:true},
-      {text:'build an AngularJS app', done:false}];
+      {text:'build an AngularJS app', done:false},
+      {text:'deploy app', done:false}];
  
     todoList.addTodo = function() {
       todoList.todos.push({text:todoList.todoText, done:false});
@@ -17,6 +18,24 @@ angular.module('todoApp', [])
       });
       return count;
     };
+
+    todoList.toggleAllDone = function() {
+      let allAlreadyDone = true;
+      angular.forEach(todoList.todos, function(todo) {
+        if (!todo.done) allAlreadyDone = false;
+      });
+
+      if(allAlreadyDone) {
+        angular.forEach(todoList.todos, function(todo) {
+          todo.done = false;
+        });
+      }
+      else {
+        angular.forEach(todoList.todos, function(todo) {
+          todo.done = true;
+        });
+      }
+    }
  
     todoList.archive = function() {
       var oldTodos = todoList.todos;
